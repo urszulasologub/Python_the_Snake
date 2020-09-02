@@ -1,3 +1,5 @@
+import abc
+
 from objects.direction import Direction
 
 
@@ -22,3 +24,7 @@ class GameObject:
 
 	def move_right(self):
 		self.x += self.width
+
+	@abc.abstractmethod
+	def draw(self):
+		pass

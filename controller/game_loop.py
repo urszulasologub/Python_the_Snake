@@ -19,7 +19,9 @@ class GameLoop:
 
 	def loop(self):
 		game_exit = False
-		test_object = Block(25, 0, self.background.block_width, self.background.block_height(), self.screen)
+		init_x, init_y = self.background.calculate_block_coordinates(int(self.background.width_blocks_count / 2),
+																	 int(self.background.height_blocks_count / 2))
+		test_object = Block(init_x, init_y, self.background.block_width, self.background.block_height(), self.screen)
 		test_object.set_color((100, 100, 100))
 		self.push_object(test_object)
 		while not game_exit:
@@ -31,7 +33,7 @@ class GameLoop:
 			self.screen.fill((255, 255, 255))
 			self.background.draw()
 
-			test_object.move(Direction.RIGHT)
+			test_object.move(Direction.DOWN)
 
 			for obj in self.objects:
 				obj.draw()
