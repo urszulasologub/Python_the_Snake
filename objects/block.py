@@ -38,7 +38,7 @@ class Block(GameObject):
 		if self.y < self.background.block_height() or \
 				self.y > self.background.height - (2 * self.background.block_height()):
 			return True
-		return False;
+		return False
 
 	def has_something_collided(self, x, y):
 		if self.x <= x < self.x + self.width:
