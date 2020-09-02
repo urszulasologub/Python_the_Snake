@@ -29,10 +29,7 @@ class Block(GameObject):
 		return False
 
 	def is_collision_with_object(self, game_object):
-		if game_object.x <= self.x < game_object.x + game_object.width:
-			if game_object.y <= self.y < game_object.y + game_object.height:
-				return True
-		return False
+		return game_object.has_something_collided(self.x, self.y)
 
 	def is_collision_with_background(self):
 		if self.x < self.background.block_width or \
@@ -42,3 +39,9 @@ class Block(GameObject):
 				self.y > self.background.height - (2 * self.background.block_height()):
 			return True
 		return False;
+
+	def has_something_collided(self, x, y):
+		if self.x <= x < self.x + self.width:
+			if self.y <= y < self.y + self.height:
+				return True
+		return False

@@ -28,3 +28,7 @@ class GameObject:
 	@abc.abstractmethod
 	def draw(self):
 		pass
+
+	@abc.abstractmethod
+	def has_something_collided(self, x, y):
+		pass
