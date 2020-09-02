@@ -24,6 +24,7 @@ class GameLoop:
 		test_object = Block(init_x, init_y, self.background.block_width, self.background.block_height(), self.screen)
 		test_object.set_color((100, 100, 100))
 		self.push_object(test_object)
+		direction = Direction.DOWN
 		while not game_exit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -33,8 +34,10 @@ class GameLoop:
 			self.screen.fill((255, 255, 255))
 			self.background.draw()
 
-			test_object.move(Direction.DOWN)
-
+			test_object.move(direction)
+			if test_object.is_collision(self.background.blocks_array):
+				test_object.set_color((0, 255, 0))
+				direction = Direction.UP
 			for obj in self.objects:
 				obj.draw()
 

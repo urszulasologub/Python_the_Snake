@@ -3,6 +3,7 @@ from objects.block import Block
 
 
 class Background:
+
 	def __init__(self, screen, screen_width, screen_height, block_width):
 		self.screen = screen
 		self.width = screen_width

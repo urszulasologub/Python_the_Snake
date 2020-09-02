@@ -21,3 +21,15 @@ class Block(GameObject):
 
 	def set_color(self, color):
 		self.color = color
+
+	def is_collision(self, game_object_list):
+		for game_object in game_object_list:
+			if self.is_collision_with_object(game_object):
+				return True
+		return False
+
+	def is_collision_with_object(self, game_object):
+		if game_object.x <= self.x < game_object.x + game_object.width:
+			if game_object.y <= self.y < game_object.y + game_object.height:
+				return True
+		return False
