@@ -14,8 +14,7 @@ class Snake(GameObject):
 									self.y,
 									self.width,
 									self.height,
-									self.background)
-							  ]
+									self.background)]
 
 	def draw(self):
 		for block in self.block_objects:

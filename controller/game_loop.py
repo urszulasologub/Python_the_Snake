@@ -2,6 +2,7 @@ import time
 
 import pygame
 
+from controller.keyboard_controller import read_keyboard
 from interface.background import Background
 from objects.block import Block
 from objects.direction import Direction
@@ -22,24 +23,30 @@ class GameLoop:
 		game_exit = False
 		init_x, init_y = self.background.calculate_block_coordinates(int(self.background.width_blocks_count / 2),
 																	 int(self.background.height_blocks_count / 2))
-		test_object = Snake(init_x, init_y, self.background.block_width, self.background.block_height(), self.background)
-		self.push_object(test_object)
-		direction = Direction.UP
+		snake = Snake(init_x, init_y, self.background.block_width, self.background.block_height(), self.background)
+		self.push_object(snake)
 		while not game_exit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
+				read_keyboard(event, snake)
 
 			self.screen.fill((255, 255, 255))
 			self.background.draw()
-
-			test_object.move(direction)
-			if test_object.is_collision_with_background():
-				direction = Direction.DOWN
 			for obj in self.objects:
 				obj.draw()
+			if snake.is_collision_with_background():
+				text = 'Game over'
+				largeText = pygame.font.Font('freesansbold.ttf', 64)
+				TextSurf, TextRect = text_objects(text, largeText)
+				TextRect.center = ((self.background.width / 2), (self.background.height / 2))
+				self.screen.blit(TextSurf, TextRect)
 
 			pygame.display.update()
 			self.clock.tick(60)
-			time.sleep(1)
+
+
+def text_objects(text, font):
+	textSurface = font.render(text, True, (0, 0, 0))
+	return textSurface, textSurface.get_rect()
