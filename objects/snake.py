@@ -1,6 +1,7 @@
 import random
 import pygame
 
+from assets.colors import random_color, DARK_RED, GREEN, random_green
 from objects.block import Block
 from objects.direction import Direction
 from objects.game_object import GameObject
@@ -15,11 +16,13 @@ class Snake(GameObject):
 		self.width = unit_width
 		self.height = unit_height
 		self.background = background
-		self.block_objects = [Block(self.x,
-									self.y,
-									self.width,
-									self.height,
-									self.background)]
+		head = Block(self.x,
+					self.y,
+					self.width,
+					self.height,
+					self.background)
+		head.set_color(DARK_RED)
+		self.block_objects = [head]
 		self.spawn_block(Direction.UP)
 		self.spawn_block(Direction.UP)
 		pygame.time.Clock()
@@ -83,5 +86,5 @@ class Snake(GameObject):
 		elif direction == Direction.DOWN:
 			block_y -= self.height
 		block = Block(block_x, block_y, self.width, self.height, self.background)
-		block.set_color((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+		block.set_color(random_green())
 		self.block_objects.append(block)

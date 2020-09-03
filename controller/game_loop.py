@@ -2,6 +2,7 @@ import time
 import pygame
 import random
 
+from assets.colors import WHITE
 from controller.keyboard_controller import KeyboardController
 from interface.captions import message_center_display
 from objects.fruit import Fruit
@@ -61,7 +62,7 @@ class GameLoop:
 				snake.speed_up()
 			snake.move(keyboard_controller.last_direction)
 
-			self.screen.fill((255, 255, 255))
+			self.screen.fill(WHITE)
 			self.background.draw()
 			for obj in self.objects:
 				obj.draw()
