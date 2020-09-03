@@ -1,5 +1,7 @@
 import abc
 
+import pygame
+
 from objects.direction import Direction
 
 
