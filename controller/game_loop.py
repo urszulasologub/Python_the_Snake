@@ -2,7 +2,7 @@ import time
 
 import pygame
 
-from controller.keyboard_controller import read_keyboard
+from controller.keyboard_controller import KeyboardController
 from interface.background import Background
 from interface.captions import message_display
 from objects.block import Block
@@ -26,12 +26,13 @@ class GameLoop:
 																	 int(self.background.height_blocks_count / 2))
 		snake = Snake(init_x, init_y, self.background.block_width, self.background.block_height(), self.background)
 		self.push_object(snake)
+		keyboard_controller = KeyboardController(snake)
 		while not game_exit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
-				read_keyboard(event, snake)
+				keyboard_controller.read_keyboard(event)
 
 			self.screen.fill((255, 255, 255))
 			self.background.draw()
