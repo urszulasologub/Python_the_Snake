@@ -1,7 +1,6 @@
 import pygame
 
 from objects.block import Block
-from objects.game_object import GameObject
 
 
 class Fruit(Block):

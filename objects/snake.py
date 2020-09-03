@@ -67,6 +67,10 @@ class Snake(GameObject):
 	def set_wait_time(self, wait_time):
 		self.wait_time = wait_time
 
+	def speed_up(self):
+		if self.wait_time is not 0:
+			self.wait_time *= 0.90
+
 	def spawn_block(self, direction):
 		block_x = self.block_objects[-1].x
 		block_y = self.block_objects[-1].y
