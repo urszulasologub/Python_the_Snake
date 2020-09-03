@@ -4,6 +4,7 @@ import pygame
 
 from controller.keyboard_controller import read_keyboard
 from interface.background import Background
+from interface.captions import message_display
 from objects.block import Block
 from objects.direction import Direction
 from objects.snake import Snake
@@ -37,16 +38,9 @@ class GameLoop:
 			for obj in self.objects:
 				obj.draw()
 			if snake.is_collision_with_background():
-				text = 'Game over'
-				largeText = pygame.font.Font('freesansbold.ttf', 64)
-				TextSurf, TextRect = text_objects(text, largeText)
-				TextRect.center = ((self.background.width / 2), (self.background.height / 2))
-				self.screen.blit(TextSurf, TextRect)
+				message_display('Game over', self.screen, 72)
+				time.sleep(5)
+				break
 
 			pygame.display.update()
 			self.clock.tick(60)
-
-
-def text_objects(text, font):
-	textSurface = font.render(text, True, (0, 0, 0))
-	return textSurface, textSurface.get_rect()
