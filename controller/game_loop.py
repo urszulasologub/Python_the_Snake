@@ -3,14 +3,12 @@ import time
 import pygame
 
 from controller.keyboard_controller import KeyboardController
-from interface.background import Background
-from interface.captions import message_display
-from objects.block import Block
-from objects.direction import Direction
+from interface.captions import message_center_display
 from objects.snake import Snake
 
 
 class GameLoop:
+
 	def __init__(self, background):
 		self.background = background
 		self.screen = self.background.screen
@@ -41,7 +39,7 @@ class GameLoop:
 			for obj in self.objects:
 				obj.draw()
 			if snake.is_collision_with_background():
-				message_display('Game over', self.screen, 72)
+				message_center_display('Game over', self.screen, 72)
 				time.sleep(5)
 				break
 

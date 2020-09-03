@@ -1,6 +1,7 @@
 import pygame
 
 from objects.block import Block
+from objects.direction import Direction
 from objects.game_object import GameObject
 
 
@@ -36,6 +37,7 @@ class Snake(GameObject):
 	def move(self, direction):
 		time = pygame.time.get_ticks()
 		if time > self.last_move_time + self.wait_time:
+			self.spawn_block(direction)
 			for block in self.block_objects:
 				block.move(direction)
 			self.last_move_time = time
@@ -48,3 +50,18 @@ class Snake(GameObject):
 
 	def set_wait_time(self, wait_time):
 		self.wait_time = wait_time
+
+	def spawn_block(self, direction):
+		block_x = self.x
+		block_y = self.y
+		if direction == Direction.LEFT:
+			block_x = self.x - self.width
+		elif direction == Direction.RIGHT:
+			block_x = self.x - self.width
+		elif direction == Direction.UP:
+			block_y = self.y - self.height
+		elif direction == Direction.DOWN:
+			block_y = self.y + self.height
+		self.block_objects.append(Block(block_x, block_y, self.width, self.height, self.background))
+		self.x = block_x
+		self.y = block_y
