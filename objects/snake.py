@@ -36,6 +36,23 @@ class Snake(GameObject):
 				return True
 		return False
 
+	def is_collision_with_itself(self):
+		for block in self.block_objects[1:]:
+			if block.has_something_collided(self.x, self.y):
+				return True
+		return False
+
+	def is_collision_with_background(self):
+		for block in self.block_objects:
+			if block.is_collision_with_background():
+				return True
+		return False
+
+	def is_collision(self):
+		if self.is_collision_with_itself() or self.is_collision_with_background():
+			return True
+		return False
+
 	def move(self, direction):
 		time = pygame.time.get_ticks()
 		if time > self.last_move_time + self.wait_time:
@@ -44,12 +61,8 @@ class Snake(GameObject):
 				self.block_objects[i].y = self.block_objects[i - 1].y
 			self.block_objects[0].move(direction)
 			self.last_move_time = time
-
-	def is_collision_with_background(self):
-		for block in self.block_objects:
-			if block.is_collision_with_background():
-				return True
-		return False
+			self.x = self.block_objects[0].x
+			self.y = self.block_objects[0].y
 
 	def set_wait_time(self, wait_time):
 		self.wait_time = wait_time

@@ -47,7 +47,7 @@ class GameLoop:
 			self.background.draw()
 			for obj in self.objects:
 				obj.draw()
-			if snake.is_collision_with_background():
+			if snake.is_collision():
 				message_center_display('Game over', self.screen, 72)
 				time.sleep(5)
 				break
