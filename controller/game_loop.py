@@ -4,6 +4,7 @@ import pygame
 
 from controller.keyboard_controller import KeyboardController
 from interface.captions import message_center_display
+from objects.fruit import Fruit
 from objects.snake import Snake
 
 
@@ -24,6 +25,14 @@ class GameLoop:
 																	 int(self.background.height_blocks_count / 2))
 		snake = Snake(init_x, init_y, self.background.block_width, self.background.block_height(), self.background)
 		snake.set_wait_time(1000)
+
+		fruit = Fruit(init_x + snake.width,
+					  init_y + snake.height,
+					  self.background.block_width,
+					  self.background.block_height(),
+					  self.background,
+					  'assets/extras/kivi.png')
+		self.push_object(fruit)
 		self.push_object(snake)
 		keyboard_controller = KeyboardController(snake)
 		while not game_exit:

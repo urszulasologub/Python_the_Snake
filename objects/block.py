@@ -8,7 +8,7 @@ black = (0, 0, 0)
 class Block(GameObject):
 
 	def __init__(self, x, y, unit_width, unit_height, background):
-		super(GameObject).__init__()
+		super().__init__()
 		self.x = x
 		self.y = y
 		self.width = unit_width
