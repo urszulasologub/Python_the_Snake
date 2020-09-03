@@ -3,6 +3,7 @@ import pygame
 import random
 
 from assets.colors import WHITE
+from assets.fruits import get_random_fruit_image_path
 from controller.keyboard_controller import KeyboardController
 from interface.captions import message_center_display
 from objects.fruit import Fruit
@@ -47,7 +48,7 @@ class GameLoop:
 					  self.background.block_width,
 					  self.background.block_height(),
 					  self.background,
-					  'assets/extras/kivi.png')
+					  get_random_fruit_image_path('assets/fruits'))
 		self.push_object(fruit)
 		keyboard_controller = KeyboardController(snake)
 		while not game_exit:
@@ -58,6 +59,7 @@ class GameLoop:
 				keyboard_controller.read_movement(event)
 			if fruit.has_something_collided(snake.x, snake.y):
 				fruit.x, fruit.y = self.get_random_empty_tile()
+				fruit.set_image(get_random_fruit_image_path('assets/fruits'))
 				snake.spawn_block(keyboard_controller.last_direction)
 				snake.speed_up()
 			snake.move(keyboard_controller.last_direction)
