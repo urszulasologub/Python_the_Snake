@@ -43,7 +43,7 @@ class Snake(GameObject):
 		return False
 
 	def is_collision_with_background(self):
-		for block in self.block_objects:
+		for block in self.block_objects[:-1]:
 			if block.is_collision_with_background():
 				return True
 		return False
@@ -69,7 +69,7 @@ class Snake(GameObject):
 
 	def speed_up(self):
 		if self.wait_time is not 0:
-			self.wait_time *= 0.90
+			self.wait_time *= 0.95
 
 	def spawn_block(self, direction):
 		block_x = self.block_objects[-1].x
