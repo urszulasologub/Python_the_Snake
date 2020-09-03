@@ -1,3 +1,4 @@
+import random
 import pygame
 
 from objects.block import Block
@@ -29,7 +30,7 @@ class Snake(GameObject):
 			block.draw()
 
 	def has_something_collided(self, x, y):
-		for block in self.block_objects[1:]:
+		for block in self.block_objects:
 			if block.has_something_collided(x, y):
 				return True
 		return False
@@ -40,6 +41,8 @@ class Snake(GameObject):
 			self.spawn_block(direction)
 			for block in self.block_objects:
 				block.move(direction)
+			#for i in range(1, len(self.block_objects)):
+
 			self.last_move_time = time
 
 	def is_collision_with_background(self):
@@ -52,16 +55,16 @@ class Snake(GameObject):
 		self.wait_time = wait_time
 
 	def spawn_block(self, direction):
-		block_x = self.x
-		block_y = self.y
+		block_x = self.block_objects[-1].x
+		block_y = self.block_objects[-1].y
 		if direction == Direction.LEFT:
-			block_x = self.x - self.width
+			block_x += self.width
 		elif direction == Direction.RIGHT:
-			block_x = self.x - self.width
+			block_x -= self.width
 		elif direction == Direction.UP:
-			block_y = self.y - self.height
+			block_y += self.height
 		elif direction == Direction.DOWN:
-			block_y = self.y + self.height
-		self.block_objects.append(Block(block_x, block_y, self.width, self.height, self.background))
-		self.x = block_x
-		self.y = block_y
+			block_y -= self.height
+		block = Block(block_x, block_y, self.width, self.height, self.background)
+		block.set_color((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+		self.block_objects.append(block)
